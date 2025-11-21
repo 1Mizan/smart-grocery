@@ -292,8 +292,8 @@ export default function SmartGrocery() {
       <section className="max-w-7xl mx-auto px-4 lg:px-8 mt-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div>
-            <h2 className="text-4xl font-extrabold mb-4 sm:text-2xl" style={{ color: BLUE }}>Get Fresh groceries, Get delivered smartly</h2>
-            <p className="text-lg text-gray-700 mb-6">Shop Grocery & Medicines with smooth checkout flow.</p>
+            <h2 className="text-4xl font-extrabold mb-4 lg:text-5xl" style={{ color: BLUE }}>Get Fresh groceries, Get delivered smartly</h2>
+            <p className="text-lg text-gray-700 mb-6 lg:text-3xl">Shop Grocery & Medicines with smooth checkout flow.</p>
             <div className="flex gap-3">
               <a onClick={() => openCategory("Grocery")} className="cursor-pointer inline-block px-3  py-2 rounded-md font-semibold" style={{ background: PINK, color: "#fff" }}>Shop Grocery</a>
               <a onClick={() => openCategory("Medicines")} className="cursor-pointer inline-block px-3  py-2 rounded-md border font-semibold" style={{ color: BLUE, borderColor: "#e6e6e6" }}>Shop Medicines</a>
