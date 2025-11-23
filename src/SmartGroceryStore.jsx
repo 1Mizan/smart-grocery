@@ -384,7 +384,8 @@ export default function SmartGrocery() {
       </footer>
 
       {/* final checkout */}
-            {showCheckout && (
+      <AnimatePresence>
+      {showCheckout && (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -538,7 +539,9 @@ export default function SmartGrocery() {
         </form>
       </motion.div>
     </motion.div>
+    
       )}
+      </AnimatePresence>
     </div>
     
   );
