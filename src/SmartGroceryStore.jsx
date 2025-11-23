@@ -43,7 +43,7 @@ function formatUSD(v) {
 export default function SmartGrocery() {
   const [cart, setCart] = useState([]);
   const [showCheckout, setShowCheckout] = useState(false);
-  const [showCartDrawer, setShowCartDrawer] = useState(false);Í
+  const [showCartDrawer, setShowCartDrawer] = useState(false);
   const [loading, setLoading] = useState(false);
   const [thankYouVisible, setThankYouVisible] = useState(false);
   const [name, setName] = useState("");
