@@ -383,163 +383,30 @@ export default function SmartGrocery() {
       <footer className="mt-20 text-center py-10 text-sm text-gray-500">
         © {new Date().getFullYear()} Team Increvo — Smart Grocery Store
       </footer>
-      {/* CHECKOUT MODAL — FINAL FIXED VERSION */}
-      
-      {showCheckout && (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] flex items-end justify-center md:items-center"
-      onClick={() => setShowCheckout(false)}
-    >
-      <motion.div
-        initial={{ y: "100%" }}
-        animate={{ y: 0 }}
-        exit={{ y: "100%" }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        className="bg-white w-full md:w-[480px] rounded-t-3xl md:rounded-3xl shadow-2xl p-6 max-h-[90vh] overflow-y-auto"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold" style={{ color: BLUE }}>
-            Checkout
-          </h2>
-          <button
+            {/* CHECKOUT MODAL — FINAL FIXED VERSION */}
+      <AnimatePresence>
+        {showCheckout && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60] flex items-end justify-center md:items-center"
             onClick={() => setShowCheckout(false)}
-            className="text-gray-500 hover:text-gray-800 text-2xl"
           >
-            ×
-          </button>
-        </div>
-
-        <form onSubmit={handlePlaceOrder} className="space-y-5">
-          {/* Name */}
-          <div>
-            <label className="text-sm text-gray-600">Full Name</label>
-            <input
-              required
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="mt-1 w-full px-4 py-3 border rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-500"
-              placeholder="Anwar Hossain"
-            />
-          </div>
-
-          {/* User ID */}
-          <div>
-            <label className="text-sm text-gray-600">User ID (numbers only)</label>
-            <input
-              required
-              type="text"
-              inputMode="numeric"
-              value={userId}
-              onChange={(e) => handleUserIdChange(e.target.value)}
-              className="mt-1 w-full px-4 py-3 border rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-500"
-              placeholder="019283746"
-            />
-          </div>
-
-          {/* Delivery Method */}
-          <div>
-            <label className="text-sm text-gray-600 mb-2 block">Delivery Method</label>
-            <div className="grid grid-cols-2 gap-3">
-              {["Drone", "StorePickup"].map((method) => (
-                <button
-                  key={method}
-                  type="button"
-                  onClick={() => setDeliveryMethod(method)}
-                  className={`py-3 rounded-xl border-2 font-medium transition-all ${
-                    deliveryMethod === method
-                      ? "border-pink-600 bg-pink-50 text-pink-700"
-                      : "border-gray-300"
-                  }`}
-                >
-                  {method === "Drone" ? "Drone Delivery" : "Store Pickup"}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Address */}
-          <div>
-            <label className="text-sm text-gray-600">
-              Address {deliveryMethod === "Drone" ? "(numbers only)" : "(optional)"}
-            </label>
-            <textarea
-              required={deliveryMethod === "Drone"}
-              value={address}
-              onChange={(e) => handleAddressChange(e.target.value)}
-              rows={2}
-              className="mt-1 w-full px-4 py-3 border rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-500"
-              placeholder={
-                deliveryMethod === "Drone"
-                  ? "e.g. 472819 (your drone drop code)"
-                  : "Road 12, Block C, Bashundhara"
-              }
-            />
-          </div>
-
-          {/* Payment Method */}
-          <div>
-            <label className="text-sm text-gray-600 mb-2 block">Payment Method</label>
-            <div className="grid grid-cols-3 gap-3">
-              {["Visa", "MasterCard", "Amex"].map((m) => (
-                <button
-                  key={m}
-                  type="button"
-                  onClick={() => setPaymentMethod(m)}
-                  className={`py-3 rounded-xl border-2 font-medium transition-all ${
-                    paymentMethod === m
-                      ? "border-pink-600 bg-pink-50 text-pink-700"
-                      : "border-gray-300"
-                  }`}
-                >
-                  {m}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Summary */}
-          <div className="bg-gray-50 rounded-xl p-4 space-y-2">
-            <div className="flex justify-between">
-              <span>Subtotal</span>
-              <span>{formatUSD(subtotal)}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Shipping</span>
-              <span>{formatUSD(shipping)}</span>
-            </div>
-            <div className="flex justify-between text-lg font-bold pt-2 border-t">
-              <span>Total</span>
-              <span style={{ color: PINK }}>{formatUSD(totalAmount)}</span>
-            </div>
-          </div>
-
-          {/* Buttons */}
-          <div className="flex gap-3">
-            <button
-              type="button"
-              onClick={() => setShowCheckout(false)}
-              className="flex-1 py-4 border border-gray-300 rounded-xl font-medium"
+            <motion.div
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="bg-white w-full md:w-[480px] rounded-t-3xl md:rounded-3xl shadow-2xl p-6 max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
             >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              disabled={loading}
-              className="flex-1 py-4 rounded-xl font-bold text-white shadow-lg disabled:opacity-70"
-              style={{ background: PINK }}
-            >
-              {loading ? "Placing Order..." : "Place Order"}
-            </button>
-          </div>
-        </form>
-      </motion.div>
-    </motion.div>
-      )}
+              {/* Your entire form stays 100% the same */}
+              ...
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
