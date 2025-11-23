@@ -1,10 +1,7 @@
-
 import React, { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-/* Apps Script URL */
 const SHEET_URL =
   "https://script.google.com/macros/s/AKfycbw0rSM-NKvRGJfLis5THYdB9hu0AtCUuzdVg8LOTD3g3RHWUsOxnap6NxHMX_KnuWTk/exec";
-/* Color tokens */
 const PINK = "#E5156B";
 const BLUE = "#174060";
 const CATEGORIES = {
@@ -33,9 +30,9 @@ const CATEGORIES = {
   ],
   Oil: [{ id: "cooking_oil", name: "Cooking oil", price: 4.5, img: "Oil.webp" }],
 };
-/* Flattened list for sheet matching */
+
 const ALL_PRODUCTS = Object.values(CATEGORIES).flat();
-/* Utility */
+
 function formatUSD(v) {
   return v.toLocaleString("en-US", { style: "currency", currency: "USD" });
 }
@@ -53,7 +50,6 @@ export default function SmartGrocery() {
   const categoryRefs = useRef(
     Object.fromEntries(Object.keys(CATEGORIES).map((c) => [c, React.createRef()]))
   );
-  /* CART FUNCTIONS */
   const addToCart = (product) => {
     setCart((prev) => {
       const f = prev.find((p) => p.id === product.id);
@@ -77,7 +73,7 @@ export default function SmartGrocery() {
   const totalAmount = subtotal + shipping;
   const openCategory = (cat) =>
     categoryRefs.current[cat]?.current?.scrollIntoView({ behavior: "smooth" });
-  /* Input handlers */
+  /* input handlers */
   const handleUserIdChange = (v) => setUserId(v.replace(/\D/g, ""));
   const handleAddressChange = (v) => {
     if (deliveryMethod === "Drone") {
@@ -86,7 +82,7 @@ export default function SmartGrocery() {
       setAddress(v);
     }
   };
-  /* GOOGLE SHEET PAYLOAD BUILDER */
+//  g- sheet payload builder
   const buildProductColumns = () => {
     const map = {
       Chocolate: 0,
@@ -125,7 +121,7 @@ export default function SmartGrocery() {
     Status: "Pending",
     items: cart,
   });
-    /* SUBMIT ORDER - FIXED VERSION */
+// submit order
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
 
@@ -152,7 +148,7 @@ export default function SmartGrocery() {
         body: JSON.stringify(payload),
       });
 
-      // SUCCESS → Reset everything
+      //  Resets everything
       setCart([]);
       setName("");
       setUserId("");
@@ -160,7 +156,6 @@ export default function SmartGrocery() {
       setPaymentMethod("Visa");
       setDeliveryMethod("Drone");
 
-      // CLOSE MODALS FIRST (this is the fix!)
       setShowCheckout(false);
       setShowCartDrawer(false);
 
@@ -177,7 +172,7 @@ export default function SmartGrocery() {
   };
   return (
     <div className="min-h-screen antialiased" style={{ background: "linear-gradient(180deg,#fffafc,#fffefe)" }}>
-      {/* HEADER */}
+      {/* header */}
       <header className="sticky top-2 z-50 bg-white/80 backdrop-blur border-b">
         <div className="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
           <div className="flex gap-3 items-center">
@@ -215,14 +210,14 @@ export default function SmartGrocery() {
           ))}
         </div>
       </header>
-      {/* HERO */}
+      {/* hero */}
       <section className="max-w-7xl mx-auto px-4 mt-8 grid md:grid-cols-2 gap-10">
         <div>
           <h2 className="text-4xl font-extrabold mb-4" style={{ color: BLUE }}>
             Get Fresh Groceries, Delivered Smartly
           </h2>
           <p className="text-gray-600 text-lg mb-6">
-            Shop grocery items,Your Favourite snacks & medicine in emergency with smooth checkout and Drone delivery.
+            Shop grocery items,your favourite snacks ,& medicine in emergency with smooth checkout and Drone delivery.
           </p>
           <div className="flex mt-10 gap-3">
             <button
@@ -246,7 +241,7 @@ export default function SmartGrocery() {
           className="w-full h-72 object-cover rounded-xl shadow"
         />
       </section>
-      {/* PRODUCT GRID */}
+      {/* product grid */}
       <main className="max-w-7xl mx-auto px-4 mt-10">
         {Object.entries(CATEGORIES).map(([cat, items]) => (
           <section key={cat} ref={categoryRefs.current[cat]} className="mb-14">
@@ -279,7 +274,7 @@ export default function SmartGrocery() {
           </section>
         ))}
       </main>
-      {/* MOBILE CART DRAWER */}
+      {/* mobile car drawer */}
       <AnimatePresence>
         {showCartDrawer && (
           <>
@@ -359,7 +354,7 @@ export default function SmartGrocery() {
           </>
         )}
       </AnimatePresence>
-      {/* THANK YOU POPUP */}
+      {/* thanks popup */}
       <AnimatePresence>
         {thankYouVisible && (
           <motion.div
@@ -378,12 +373,12 @@ export default function SmartGrocery() {
           </motion.div>
         )}
       </AnimatePresence>
-      {/* FOOTER */}
+      {/* footer */}
       <footer className="mt-20 text-center py-10 text-sm text-gray-500">
         © {new Date().getFullYear()} Team Increvo — Smart Grocery Store
       </footer>
 
-      {/* final checkout */}
+      {/* checkout modal */}
       <AnimatePresence>
       {showCheckout && (
     <motion.div
@@ -414,7 +409,7 @@ export default function SmartGrocery() {
         </div>
 
         <form onSubmit={handlePlaceOrder} className="space-y-5">
-          {/* Name */}
+          {/* name*/}
           <div>
             <label className="text-sm text-gray-600">Full Name</label>
             <input
@@ -423,11 +418,11 @@ export default function SmartGrocery() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="mt-1 w-full px-4 py-3 border rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-500"
-              placeholder="Anwar Hossain"
+              placeholder="Santiago Albarto"
             />
           </div>
 
-          {/* User ID */}
+          {/* user id */}
           <div>
             <label className="text-sm text-gray-600">User ID (numbers only)</label>
             <input
@@ -441,7 +436,7 @@ export default function SmartGrocery() {
             />
           </div>
 
-          {/* Delivery Method */}
+          {/* delivery method */}
           <div>
             <label className="text-sm text-gray-600 mb-2 block">Delivery Method</label>
             <div className="grid grid-cols-2 gap-3">
@@ -462,7 +457,7 @@ export default function SmartGrocery() {
             </div>
           </div>
 
-          {/* Address */}
+          {/* address */}
           <div>
             <label className="text-sm text-gray-600">
               Address {deliveryMethod === "Drone" ? "(numbers only)" : "(optional)"}
@@ -481,7 +476,7 @@ export default function SmartGrocery() {
             />
           </div>
 
-          {/* Payment Method */}
+          {/* payment mathod */}
           <div>
             <label className="text-sm text-gray-600 mb-2 block">Payment Method</label>
             <div className="grid grid-cols-3 gap-3">
@@ -502,7 +497,7 @@ export default function SmartGrocery() {
             </div>
           </div>
 
-          {/* Summary */}
+          {/* summary */}
           <div className="bg-gray-50 rounded-xl p-4 space-y-2">
             <div className="flex justify-between">
               <span>Subtotal</span>
@@ -518,7 +513,7 @@ export default function SmartGrocery() {
             </div>
           </div>
 
-          {/* Buttons */}
+          {/* bsuttons */}
           <div className="flex gap-3">
             <button
               type="button"
