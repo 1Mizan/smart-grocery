@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 const SHEET_URL =
-  "https://script.google.com/macros/s/AKfycbw0rSM-NKvRGJfLis5THYdB9hu0AtCUuzdVg8LOTD3g3RHWUsOxnap6NxHMX_KnuWTk/exec";
+  "https://script.google.com/macros/s/AKfycbywF1wCxCw8X_2UwkDK8BEDV3drX1DXzxxFbB4GnxgmQCp_wrTheAm0NhhFXFcGHfFr/exec";
 const PINK = "#E5156B";
 const BLUE = "#174060";
 const CATEGORIES = {
@@ -118,7 +118,7 @@ export default function SmartGrocery() {
     Method: paymentMethod,
     "Total amount": totalAmount.toFixed(2),
     ...buildProductColumns(),
-    Status: "Pending",
+    Status: "",
     items: cart,
   });
 // submit order
@@ -253,7 +253,7 @@ export default function SmartGrocery() {
                 <div key={p.id} className="bg-white border rounded-xl shadow-sm p-3">
                   <img
                     src={p.img}
-                    className="w-full h-auto object-cover rounded-lg mb-3 lg:w-full lg:h-auto "
+                    className="w-full h-auto  rounded-lg mb-3 lg:w-full lg:h-auto "
                   />
                   <div className="font-semibold" style={{ color: BLUE }}>
                     {p.name}
