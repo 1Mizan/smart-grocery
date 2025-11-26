@@ -253,7 +253,7 @@ export default function SmartGrocery() {
                 <div key={p.id} className="bg-white border rounded-xl shadow-sm p-3">
                   <img
                     src={p.img}
-                    className="w-full h-36 object-cover rounded-lg mb-3"
+                    className="w-full h-auto object-cover rounded-lg mb-3 lg:w-full lg:h-auto "
                   />
                   <div className="font-semibold" style={{ color: BLUE }}>
                     {p.name}
